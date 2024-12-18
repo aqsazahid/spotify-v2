@@ -138,10 +138,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions for theme change */
-html {
-  transition: background-color 0.3s, color 0.3s;
-}
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

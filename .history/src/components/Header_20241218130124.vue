@@ -1,13 +1,14 @@
 <template>
   <header class="flex flex-col items-center justify-between p-4 bg-gray-800 dark:bg-gray-900 text-white dark:text-gray-200 shadow-lg">
+    <!-- Top Navigation -->
     <div class="flex items-center justify-between w-full mb-4">
       <div class="text-xl font-extrabold tracking-wide text-green-500">
-        <span class="text-gray-200 dark:text-white">SP</span>
-        <span class="text-green-500">OTIFY</span>
-        <span class="ml-2 text font-semibold text-gray-400 dark:text-gray-300">
-          - Created using Vue + Tailwind
-        </span> 
-      </div>
+  <span class="text-gray-200 dark:text-white">SP</span>
+  <span class="text-green-500">OTIFY</span>
+  <span class="ml-2 text font-semibold text-gray-400 dark:text-gray-300">
+    - Created using Vue + Tailwind
+  </span> 
+</div>
       <div class="relative mx-auto w-64">
         <button
           @click="toggleDropdown"
@@ -30,6 +31,8 @@
             ></path>
           </svg>
         </button>
+
+        <!-- Dropdown Content -->
         <div
           v-if="isDropdownOpen"
           @scroll="handleScroll"
@@ -56,43 +59,21 @@
           </div>
         </div>
       </div>
-      <button @click="toggleTheme" class="p-2 rounded-full bg-gradient-to-r from-green-400 to-green-600 text-white shadow-md hover:from-green-500 hover:to-green-700 transition-all" aria-label="Toggle Dark/Light Mode">
-        <span v-if="isDarkMode" class="material-icons">light_mode</span>
-        <span v-else class="material-icons">dark_mode</span>
-      </button>
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import SpotifyService from '../services/spotifyService';
+
+// State
 const categories = ref([]);
 const displayedCategories = ref([]);
 const isDropdownOpen = ref(false);
 const offset = ref(0);
 const limit = 15;
 const loadingMore = ref(false);
-// State for theme mode
-const isDarkMode = ref(false);
-
-// Toggle theme method
-const toggleTheme = () => {
-  isDarkMode.value = !isDarkMode.value;
-  document.documentElement.setAttribute('data-mode', isDarkMode.value ? 'dark' : 'light');
-};
-
-// Initialize theme from localStorage
-onMounted(() => {
-  const savedTheme = localStorage.getItem('theme');
-  isDarkMode.value = savedTheme === 'dark';
-  document.documentElement.setAttribute('data-mode', isDarkMode.value ? 'dark' : 'light');
-});
-
-// Watch for changes and persist in localStorage
-watch(isDarkMode, (newValue) => {
-  localStorage.setItem('theme', newValue ? 'dark' : 'light');
-});
 
 // Fetch Spotify Categories with Pagination
 const fetchCategories = async (reset = false) => {
@@ -115,6 +96,7 @@ const fetchCategories = async (reset = false) => {
   }
 };
 
+// Toggle Dropdown
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
   if (isDropdownOpen.value && categories.value.length === 0) {
@@ -138,10 +120,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions for theme change */
-html {
-  transition: background-color 0.3s, color 0.3s;
-}
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

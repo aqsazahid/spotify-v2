@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import SpotifyService from '../services/spotifyService';
 const categories = ref([]);
 const displayedCategories = ref([]);
@@ -73,26 +73,6 @@ const isDropdownOpen = ref(false);
 const offset = ref(0);
 const limit = 15;
 const loadingMore = ref(false);
-// State for theme mode
-const isDarkMode = ref(false);
-
-// Toggle theme method
-const toggleTheme = () => {
-  isDarkMode.value = !isDarkMode.value;
-  document.documentElement.setAttribute('data-mode', isDarkMode.value ? 'dark' : 'light');
-};
-
-// Initialize theme from localStorage
-onMounted(() => {
-  const savedTheme = localStorage.getItem('theme');
-  isDarkMode.value = savedTheme === 'dark';
-  document.documentElement.setAttribute('data-mode', isDarkMode.value ? 'dark' : 'light');
-});
-
-// Watch for changes and persist in localStorage
-watch(isDarkMode, (newValue) => {
-  localStorage.setItem('theme', newValue ? 'dark' : 'light');
-});
 
 // Fetch Spotify Categories with Pagination
 const fetchCategories = async (reset = false) => {
@@ -138,10 +118,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions for theme change */
-html {
-  transition: background-color 0.3s, color 0.3s;
-}
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

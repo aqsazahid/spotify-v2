@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import SpotifyService from '../services/spotifyService';
 const categories = ref([]);
 const displayedCategories = ref([]);
@@ -138,10 +138,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Smooth transitions for theme change */
-html {
-  transition: background-color 0.3s, color 0.3s;
-}
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

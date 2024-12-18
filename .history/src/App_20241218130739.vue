@@ -1,5 +1,5 @@
 <template>
-  <div class=" h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white" data-mode="light">
+  <div class=" h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white" data-mode="light">
     <Sidebar />
     <div class="flex-1 flex flex-col">
       <Header />
@@ -15,6 +15,18 @@ import Sidebar from './components/Sidebar.vue';
 import Header from './components/Header.vue';
 import MainContent from './components/MainContent.vue';
 import Player from './components/Player.vue';
+
+// Initialize theme from localStorage
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme');
+  isDarkMode.value = savedTheme === 'dark';
+  document.documentElement.setAttribute('data-mode', isDarkMode.value ? 'dark' : 'light');
+});
+
+// Watch for changes and persist in localStorage
+watch(isDarkMode, (newValue) => {
+  localStorage.setItem('theme', newValue ? 'dark' : 'light');
+});
 </script>
 
 <style>

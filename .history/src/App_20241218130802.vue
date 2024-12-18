@@ -1,5 +1,5 @@
 <template>
-  <div class=" h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white" data-mode="light">
+  <div class=" h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white" data-mode="light">
     <Sidebar />
     <div class="flex-1 flex flex-col">
       <Header />
