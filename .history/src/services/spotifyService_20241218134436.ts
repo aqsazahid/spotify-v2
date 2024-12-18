@@ -1,5 +1,5 @@
-const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const client_secret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+const client_id = process.env.VUE_APP_SPOTIFY_CLIENT_ID;
+const client_secret = process.env.VUE_APP_SPOTIFY_CLIENT_SECRET;
 
 const SpotifyService = {
   // Method to fetch Spotify Access Token
